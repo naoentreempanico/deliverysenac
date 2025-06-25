@@ -1,57 +1,116 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="stylo.css">
     <title>Delivery Senac</title>
 </head>
+
 <body>
-    <h1>Delivery Senac</h1>
+<nav class="navegacao">
+    <ul>
+        <li><a href="./">🍕 Delivery</a></li>
+        <li><a href="#">+ Pizza</a></li>
+        <li><button id="abiriCarrinho">🛒</button></li>
+    </ul>
+
+</nav>
+    <ul id="cardapio">
+        <!--Lista de pizzas-->
+
+
+    </ul>
+    <div id="checkout" class="checkout">
+        <button id="fecharCarrinho">❌</button>
+        <h2>Pedido</h2>
+        <ul id="carrinho"></ul>
+    </div>
     <script>
-        let pizza1 = {
-            nome: "Calabresa",
+        let cardapio = [{
+            foto: "img/pizza1.jpg",
             ingredientes: ["Calabresa", "Cabola", "Muçarela"],
             valor: 35.00
-        };
-        let pizza2 ={
+        },
+        {
+            foto: "img/pizza2.jpg",
             nome: "Frango com Capury",
-            ingredientes: ["franco","Capury", "Muçarela"],
+            ingredientes: ["franco", "Capury", "Muçarela"],
             valor: 40.00
-        }
-
-        let pizza3 ={
+        },
+        {
+            foto: "img/pizza3.jpg",
             nome: "Quatro queijos",
             ingredientes: ["Muçarela", "Provolone", "Gorgonzola", "Parmesão"],
             valor: 50.00
 
-        }
-        let pizza4 ={
+        },
+        {
+            foto: "img/pizza4.jpg",
             nome: "Bacon",
             ingredientes: ["Qeuijo", "Bacon", "Milho", "Molho de tomate"],
             valor: 50.00
 
-        }
-
-        let pizza5 ={
+        },
+        {
+            foto: "img/pizza5.jpg",
             nome: "Margarita",
-            ingredientes: ["Muçarela","Mangericão", "Molho de tomate"],
+            ingredientes: ["Muçarela", "Mangericão", "Molho de tomate"],
             valor: 45.00
-        
-        }
 
-        let bebidas ={
-            nome: [ "Coca-cola", "Água"],
+        },
+        {
+            foto: "img/pizza6.jpg",
+            nome: ["Coca-cola", "Água"],
             valor: 10.00
         }
 
-        let cardapio = [pizza1, pizza2, pizza3, pizza4, pizza5, bebidas];
 
-        console.log("Cardapio da pizzaria Senac:")
-        cardapio.forEach((pizza) =>{
-            console.log(`${pizza.nome} valor: ${pizza.valor.toFixed(2)} `)
+
+        ];
+        const cardapioUl = document.getElementById('cardapio');//<ul  id "cardapio"></ul>
+        //zera a lista do cardapio.
+        cardapioUl.innerHTML = "";
+        //recetição para exibir a lista de pizzas no cardapio (ul)
+
+        cardapio.forEach((pizza) => {
+            //cria um elemento (li) para inserir cada pizza na Ul
+            const li = document.createElement('li');
+            //atribui uma classe para a (li) criada
+            li.className = "pizza";
+            //cria um elemento <img> para adicionar a imagem pizza
+            const img = document.createElement('img');
+            //atribui a foto da pizza para o 'src' da img.
+            img.src = pizza.foto
+            //criar uma div para exibir os ingredientes da pizza
+            const ingredientesDiv = document.createElement('div');
+            ingredientesDiv.innerHTML ='(${pizza.ingredientes.join('| ')})';
+            //ATRIBUIR UMA CLASSE PARA INGREDIENTES
+            ingredientesDiv.className="ingredientes";
+            //criar um botão para adicionar pizzas ao carrinho
+            const button = document.createElement('button');
+            //texto para botão compra
+            button.textContent = "COMPRAR";
+            li.appendChild(img);
+            li.append(`${pizza.nome} - R$ ${pizza.valor.toFixed(2)}`);
+            li.appendChild (ingredientesDiv);
+            li.appendChild(button);
+            //adicionar a <li> dentro da <ul>
+            cardapioUl.appendChild(li);
+
+
+
+
+
+            
+
+
+            //console.log(`${pizza.nome} valor: ${pizza.valor.toFixed(2)} `)
         });
 
 
     </script>
 </body>
+
 </html>
