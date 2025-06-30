@@ -4,19 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" href="stylo.css">
+    <link rel="stylesheet" href="stylo.css">
+
+
+
     <title>Delivery Senac</title>
 </head>
 
 <body>
-<nav class="navegacao">
-    <ul>
-        <li><a href="./">🍕 Delivery</a></li>
-        <li><a href="#">+ Pizza</a></li>
-        <li><button id="abiriCarrinho">🛒</button></li>
-    </ul>
+    <nav class="navegacao">
+        <ul>
+            <li><a href="./">🍕 Delivery</a></li>
+            <li><button id="adicionarPizza">+ pizza</button></li>
+            <li><button id="abrirCarrinho">🛒</button></li>
+        </ul>
 
-</nav>
+    </nav>
     <ul id="cardapio">
         <!--Lista de pizzas-->
 
@@ -26,91 +29,48 @@
         <button id="fecharCarrinho">❌</button>
         <h2>Pedido</h2>
         <ul id="carrinho"></ul>
+        <div class="total"></div>
     </div>
-    <script>
-        let cardapio = [{
-            foto: "img/pizza1.jpg",
-            ingredientes: ["Calabresa", "Cabola", "Muçarela"],
-            valor: 35.00
-        },
-        {
-            foto: "img/pizza2.jpg",
-            nome: "Frango com Capury",
-            ingredientes: ["franco", "Capury", "Muçarela"],
-            valor: 40.00
-        },
-        {
-            foto: "img/pizza3.jpg",
-            nome: "Quatro queijos",
-            ingredientes: ["Muçarela", "Provolone", "Gorgonzola", "Parmesão"],
-            valor: 50.00
+    <dialog id="modal">
+        <div class="mascara">
+            <form id="cadastraPizza" class="modal">
+                <div class="modal-header">
+                    <h2>Cadastro de pizzas</h2>
+                    <div class="modal-content"></div>
+                    <button type="button" id="fecharModal" class="fechar">❌</button>
+                </div>
+                <div class="modal-boby">
 
-        },
-        {
-            foto: "img/pizza4.jpg",
-            nome: "Bacon",
-            ingredientes: ["Qeuijo", "Bacon", "Milho", "Molho de tomate"],
-            valor: 50.00
-
-        },
-        {
-            foto: "img/pizza5.jpg",
-            nome: "Margarita",
-            ingredientes: ["Muçarela", "Mangericão", "Molho de tomate"],
-            valor: 45.00
-
-        },
-        {
-            foto: "img/pizza6.jpg",
-            nome: ["Coca-cola", "Água"],
-            valor: 10.00
-        }
-
-
-
-        ];
-        const cardapioUl = document.getElementById('cardapio');//<ul  id "cardapio"></ul>
-        //zera a lista do cardapio.
-        cardapioUl.innerHTML = "";
-        //recetição para exibir a lista de pizzas no cardapio (ul)
-
-        cardapio.forEach((pizza) => {
-            //cria um elemento (li) para inserir cada pizza na Ul
-            const li = document.createElement('li');
-            //atribui uma classe para a (li) criada
-            li.className = "pizza";
-            //cria um elemento <img> para adicionar a imagem pizza
-            const img = document.createElement('img');
-            //atribui a foto da pizza para o 'src' da img.
-            img.src = pizza.foto
-            //criar uma div para exibir os ingredientes da pizza
-            const ingredientesDiv = document.createElement('div');
-            ingredientesDiv.innerHTML ='(${pizza.ingredientes.join('| ')})';
-            //ATRIBUIR UMA CLASSE PARA INGREDIENTES
-            ingredientesDiv.className="ingredientes";
-            //criar um botão para adicionar pizzas ao carrinho
-            const button = document.createElement('button');
-            //texto para botão compra
-            button.textContent = "COMPRAR";
-            li.appendChild(img);
-            li.append(`${pizza.nome} - R$ ${pizza.valor.toFixed(2)}`);
-            li.appendChild (ingredientesDiv);
-            li.appendChild(button);
-            //adicionar a <li> dentro da <ul>
-            cardapioUl.appendChild(li);
-
-
-
-
-
-            
-
-
-            //console.log(`${pizza.nome} valor: ${pizza.valor.toFixed(2)} `)
-        });
-
-
-    </script>
+                    <div>
+                        <label for="nome">Nome</label>
+                        <input type="text" name="nome" id="nome" required>
+                    </div>
+                    <div>
+                        <label for="foto">Foto</label>
+                        <input type="text" name="foto" id="foto" placeholder="imgs/nome.jpg" required>
+                    </div>
+                    <div>
+                        <label for="valor">Valor</label>
+                        <input type="number" step="0.01" id="valor" name="valor" required>
+                    </div>
+                    <div>
+                        <label for="ingredientes">Ingredientes</label>
+                        <input type="text" name="ingredientes" id="ingredientes">
+                    </div>
+                    <div>
+                        <button type="submit">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </dialog>
+    <script src="pizza.js"></script>
+    <script src="cardapio.js"></script>
+    <script src="carrinho.js"></script>
+    <script src="app.js"></script>
+  
 </body>
+
+
 
 </html>
